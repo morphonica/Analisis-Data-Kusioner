@@ -107,7 +107,7 @@ fig5 = px.bar(
 )
 st.plotly_chart(fig5, use_container_width=True)
 
-st.subheader("Heatmap Jawaban")
+st.subheader("Heatmap (Bonus)")
 
 heatmap_data = (
     df[pertanyaan]
