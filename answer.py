@@ -1,17 +1,11 @@
 import pandas as pd
 
-# =============================
-# LOAD DATA
-# =============================
 df = pd.read_excel("data_kuesioner.xlsx")
 
 pertanyaan = [f"Q{i}" for i in range(1, 18)]
 jumlah_responden = len(df)
 total_respon = jumlah_responden * len(pertanyaan)
 
-# =============================
-# MAP SKALA & KATEGORI
-# =============================
 skor_map = {
     "SS": 6,
     "S": 5,
@@ -32,9 +26,6 @@ kategori_map = {
 
 target_question = input().strip()
 
-# =============================
-# q1: skala terbanyak
-# =============================
 if target_question == "q1":
     counts = df[pertanyaan].stack().value_counts()
     skala = counts.idxmax()
@@ -42,9 +33,6 @@ if target_question == "q1":
     persen = round(jumlah / total_respon * 100, 1)
     print(f"{skala}|{jumlah}|{persen}")
 
-# =============================
-# q2: skala tersedikit
-# =============================
 elif target_question == "q2":
     counts = df[pertanyaan].stack().value_counts()
     skala = counts.idxmin()
@@ -52,9 +40,6 @@ elif target_question == "q2":
     persen = round(jumlah / total_respon * 100, 1)
     print(f"{skala}|{jumlah}|{persen}")
 
-# =============================
-# q3: SS terbanyak
-# =============================
 elif target_question == "q3":
     hasil = []
     for q in pertanyaan:
@@ -65,9 +50,6 @@ elif target_question == "q3":
     persen = round(jumlah / jumlah_responden * 100, 1)
     print(f"{q}|{jumlah}|{persen}")
 
-# =============================
-# q4: S terbanyak
-# =============================
 elif target_question == "q4":
     hasil = []
     for q in pertanyaan:
@@ -78,9 +60,6 @@ elif target_question == "q4":
     persen = round(jumlah / jumlah_responden * 100, 1)
     print(f"{q}|{jumlah}|{persen}")
 
-# =============================
-# q5: CS terbanyak
-# =============================
 elif target_question == "q5":
     hasil = []
     for q in pertanyaan:
@@ -91,9 +70,6 @@ elif target_question == "q5":
     persen = round(jumlah / jumlah_responden * 100, 1)
     print(f"{q}|{jumlah}|{persen}")
 
-# =============================
-# q6: CTS terbanyak
-# =============================
 elif target_question == "q6":
     hasil = []
     for q in pertanyaan:
@@ -104,9 +80,6 @@ elif target_question == "q6":
     persen = round(jumlah / jumlah_responden * 100, 1)
     print(f"{q}|{jumlah}|{persen}")
 
-# =============================
-# q7: TS terbanyak (2 DESIMAL)
-# =============================
 elif target_question == "q7":
     hasil = []
     for q in pertanyaan:
@@ -117,9 +90,6 @@ elif target_question == "q7":
     persen = jumlah / jumlah_responden * 100
     print(f"{q}|{jumlah}|{persen:.1f}")
 
-# =============================
-# q8: TS terbanyak (2 DESIMAL)
-# =============================
 elif target_question == "q8":
     hasil = []
     for q in pertanyaan:
@@ -130,9 +100,6 @@ elif target_question == "q8":
     persen = jumlah / jumlah_responden * 100
     print(f"{q}|{jumlah}|{persen:.1f}")
 
-# =============================
-# q9: pertanyaan yang memiliki STS
-# =============================
 elif target_question == "q9":
     out = []
     for q in pertanyaan:
@@ -142,34 +109,22 @@ elif target_question == "q9":
             out.append(f"{q}:{persen}")
     print("|".join(out))
 
-# =============================
-# q10: rata-rata skor keseluruhan
-# =============================
 elif target_question == "q10":
     skor = df[pertanyaan].replace(skor_map)
     print(f"{skor.stack().mean():.2f}")
 
-# =============================
-# q11: skor rata-rata tertinggi
-# =============================
 elif target_question == "q11":
     skor = df[pertanyaan].replace(skor_map)
     avg = skor.mean()
     q = avg.idxmax()
     print(f"{q}:{avg[q]:.2f}")
 
-# =============================
-# q12: skor rata-rata terendah
-# =============================
 elif target_question == "q12":
     skor = df[pertanyaan].replace(skor_map)
     avg = skor.mean()
     q = avg.idxmin()
     print(f"{q}:{avg[q]:.2f}")
 
-# =============================
-# q13: kategori jawaban
-# =============================
 elif target_question == "q13":
     kategori = df[pertanyaan].replace(kategori_map)
     counts = kategori.stack().value_counts()
